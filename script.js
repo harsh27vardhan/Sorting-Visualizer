@@ -23,9 +23,12 @@
 //   }
 // });
 
+const start = document.querySelector("#start");
+let moving = 0;
+start.addEventListener("click",selectionSort);
 
-var xValues = ["0", "1", "2", "3", "4", "5", "6", "7"," 8", "9","10"];
-var yValues = [55,14,44,24,20,33,25,21,76,5];
+var xValues = ["0", "1", "2", "3", "4", "5", "6", "7"," 8", "9"];
+var yValues = [55,14,44,25,20,35,30,21,76,65];
 var barColors = ["black", "black","black","black","black","black", "black","black","black","black"];
 
 function showGraph(){
@@ -48,28 +51,33 @@ function showGraph(){
   });
 }
 function selectionSort(){
-  const n = yValues.length;
-  for (let i = 0; i < n - 1; i++) {
-    setTimeout(()=>{
-      let min_idx = i;
-      for (let j = i + 1; j < n; j++) {
-        if (yValues[j] < yValues[min_idx]) {
-          min_idx = j;
+  if(moving === 0){
+    moving=1;
+    const n = yValues.length;
+    for (let i=0; i<n ; i++) {
+      setTimeout(()=>{
+        let min_idx = i;
+        for (let j=i+1; j<n; j++) {
+          if (yValues[j] < yValues[min_idx]) {
+            min_idx = j;
+          }
         }
+        // Swap
+        let temp = yValues[i];
+        yValues[i] = yValues[min_idx];
+        yValues[min_idx] = temp;
+        barColors[i] = "red";
+        console.log(yValues);
+        showGraph();
+        if(i===n-1){
+          barColors[n-1] = "red";
+        }
+      },i*1000)
+      if(i===n-2){
+        clearTimeout();
       }
-      // Swap
-      let temp = yValues[i];
-      yValues[i] = yValues[min_idx];
-      yValues[min_idx] = temp;
-
-      console.log(yValues);
-      showGraph();
-    },i*1000)
-    if(i===n){
-      clearTimeout();
     }
   }
 }
 
 showGraph();
-selectionSort();

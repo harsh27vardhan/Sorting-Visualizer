@@ -1,0 +1,14 @@
+body{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem;
+}
+#start{
+    font-size: large;
+    background-color: white;
+    border-radius: 8px;
+    border: 2px solid #aeaeae;
+}
